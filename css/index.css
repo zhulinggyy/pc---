@@ -21,7 +21,7 @@ img{display: block;}
 #wrap{
   position: relative;
   height:100%;
-  background: palegreen;
+  /*background: palegreen;*/
 }
 #header{
   position: relative;
@@ -108,22 +108,37 @@ img{display: block;}
 .content-main>li{
     position: relative;
     height: 20%;
-    background: yellowgreen;
+    background-repeat: no-repeat;
 }
 .content-main>li section{
     width:1100px;
     height: 520px;
-    background:powderblue;
     position: absolute;
     top:50%;
     left:50%;
     margin-top:-260px;
     margin-left:-550px;
 }
+.content-main>li:nth-child(1){
+    background-image: url("../img/bg1.jpg");
+}
+.content-main>li:nth-child(2){
+    background-image: url("../img/bg2.jpg");
+}
+.content-main>li:nth-child(3){
+    background-image: url("../img/bg3.jpg");
+}
+.content-main>li:nth-child(4){
+    background-image: url("../img/bg4.jpg");
+}
+.content-main>li:nth-child(5){
+    background-image: url("../img/bg5.jpg");
+}
 .home-carousel{
     position: relative;
     height: 100%;
-
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }
 .home-carousel li{
     position: absolute;
@@ -150,4 +165,56 @@ img{display: block;}
 }
 .home-carousel li:nth-child(4){
     background:#000000;
+}
+.home-point{
+    position: absolute;
+    bottom:0;
+    left:50%;
+    transform: translateX(-50%);
+}
+.home-point li{
+    float: left;
+    width:20px;
+    height: 20px;
+    margin:2px;
+    box-shadow:0 0 4px rgba(25,25,25,0.8);
+    border-radius: 50%;
+}
+.home-point .active{
+    background: white;
+}
+.home-carousel .left-hide{
+    visibility: hidden;
+    animation: leftHide 2s linear;
+
+}
+.home-carousel .right-show{
+    visibility: visible;
+    animation: rightShow 2s linear;
+}
+
+@keyframes leftHide{
+    0% {
+        visibility: visible
+    }
+    50% {
+        transform: translateX(-40%) rotateY(30deg) scale(0.8)
+    }
+    100% {
+        transform: translateZ(-200px);
+        visibility: hidden
+    }
+
+}
+@keyframes rightShow{
+    0% {
+        visibility: hidden; transform: translateZ(-200px)
+    }
+    50% {
+        transform: translateX(40%) rotateY(-30deg) scale(0.8)
+    }
+    100% {
+        visibility: visible;
+    }
+
 }
