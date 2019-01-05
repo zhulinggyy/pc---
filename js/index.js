@@ -1,29 +1,112 @@
 
 //获取dom元素
 //头部dom元素
-window.onload=function() {
+window.addEventListener('DOMContentLoaded',function () {
+
+
     var headerLisNodes = document.querySelectorAll('.nav li');
     var arrowNode = document.querySelector('.arrow');
     var headerUpNodes = document.querySelectorAll('.up');
+    var contentulNode = document.querySelector('.content-main');
+    var contentNode = document.querySelector('.content');
+    var contentHeight=contentNode.offsetHeight;
+    var arrowHalfWidth=arrowNode.offsetWidth/2;
+    var newIndex=0;
+    var wheelTimer=null;
+
 
 
 // 头部JS
-    arrowNode.style.left = headerLisNodes[0].getBoundingClientRect().left + headerLisNodes[0]
-            .offsetWidth / 2 - arrowNode.offsetWidth / 2 + 'px';
-    console.log(headerLisNodes[0].getBoundingClientRect().left);
+    arrowNode.style.left=headerLisNodes[0].getBoundingClientRect().left+headerLisNodes[0].offsetWidth/2
+        -arrowNode.offsetWidth/2+'px';
     headerUpNodes[0].style.width='100%';
-    for (var i = 0; i < headerLisNodes.length; i++) {
-        headerLisNodes[i].index = i;
-        headerLisNodes[i].onclick = function () {
-            for (var j = 0; j < headerUpNodes.length; j++) {
-                headerUpNodes[j].style.width='0';
-            }
-            headerUpNodes[this.index].style.width='100%';
-            arrowNode.style.left = this.getBoundingClientRect().left + this
-                    .offsetWidth / 2 - arrowNode.offsetWidth / 2 + 'px';
+    for (var i = 0; i <headerLisNodes.length; i++) {
+        // 找一个变量存起来，让第一个变成黑色
+        headerLisNodes[i].index=i;
+        // 给每一个li添加事件
+        headerLisNodes[i].onclick=function () {
+            newIndex = this.index;
+            move(newIndex);
         }
+
+    }
+// 公共move函数
+    function move(newIndex) {
+        //默认清空所有width为0
+        for (var j = 0; j < headerUpNodes.length; j++) {
+            headerUpNodes[j].style.width='0';
+        }
+        // 设置当前width为100%
+        headerUpNodes[newIndex].style.width='100%';
+        // 点击哪小三角区哪
+        arrowNode.style.left=headerLisNodes[newIndex].getBoundingClientRect().left+headerLisNodes[newIndex].offsetWidth/2
+            -arrowHalfWidth+'px';
+        // 让内容区ul运动
+        contentulNode.style.top=-newIndex*contentHeight+'px';
     }
 
-}
 
+
+
+    // 滚轮事件
+    contentHandle();
+    function contentHandle() {
+        document.onmousewheel=wheel;
+        document.addEventListener('DOMMouseScroll',wheel);
+        function wheel(event) {
+            event = event || window.event;
+            clearTimeout(wheelTimer);
+            wheelTimer=setTimeout(function(){
+                var flag='';
+                if (event.wheelDelta) {
+                    //ie/chrome
+                    if (event.wheelDelta > 0) {
+                        flag = 'down';
+                    } else {
+                        flag = 'up';
+                    }
+                } else if (event.detail) {
+                    //firefox
+                    if (event.detail < 0) {
+                        flag = 'down';
+                    } else {
+                        flag = 'up'
+                    }
+                }
+
+                switch (flag) {
+                    case 'down' :
+                        if(newIndex>0) {
+                            newIndex--;
+                            console.log('down');
+                            move(newIndex);
+                        }
+                        break;
+                    case 'up' :
+                        if(newIndex<4){
+                            newIndex++;
+                            console.log('up');
+                            move(newIndex);
+                        }
+
+                        break;
+                }
+            },200);
+            //禁止默认行为
+            event.preventDefault && event.preventDefault();
+            return false;
+        }
+    }
+    // // //浏览器调整窗口大小事件
+            window.onresize=function () {
+    // //     //修正小箭头的位置和ul位置
+            arrowNode.style.left=headerLisNodes[newIndex].getBoundingClientRect().left+headerLisNodes[newIndex].offsetWidth/2
+                -arrowHalfWidth+'px';
+             // 让内容区ul运动
+             contentulNode.style.top=-newIndex*contentHeight+'px';
+        }
+ })
+
+
+    
 

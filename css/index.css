@@ -1,5 +1,5 @@
 /*#cssreset*/
-html,body{height: 100%;overflow: hidden;}
+html,body{height: 100%;/*overflow: hidden;*/}
 html,body,h1,h2,h3,h4,h5,h6,p,ul,li{margin: 0px;padding: 0px;font: 14px "微软雅黑";}
 a{text-decoration: none;display: block;}
 li{list-style: none;}
@@ -9,16 +9,26 @@ img{display: block;}
   .clearfix{*zoom: 1;}
 .clearfix:after{content: "";display: block;clear: both;}
 
+/*/公共样式*!*/
+.common-title{
+    color:#009ee0;
+    font-size:80px;
+    line-height:0.8;
+    font-weight:bold;
+    letter-spacing:-5px;
+}
+
 #wrap{
   position: relative;
   height:100%;
-  background: #000;
+  background: palegreen;
 }
 #header{
   position: relative;
   width:100%;
   height: 80px;
   background: plum;
+  z-index: 10;
 }
 .headerMain{
   width:1100px;
@@ -34,6 +44,9 @@ img{display: block;}
 .music{
   float: left;
 }
+.audio{
+    float: left;
+}
 .nav{
   float: right;
   margin-top:50px;
@@ -46,7 +59,11 @@ img{display: block;}
   float: left;
   margin-left:40px;
 }
+.nav li:nth-child(1){
+    width: 18px;
+}
 .nav li .up{
+    float: left;
   position: absolute;
   left:0;
   top:0;
@@ -70,4 +87,67 @@ img{display: block;}
   background-image: url("../img/arrow.png");
   background-repeat: no-repeat;
   transition:  left 1s;
+}
+.content{
+  position: absolute;
+  left:0;
+  bottom:0;
+  right:0;
+  top: 80px;
+  overflow: hidden;
+
+}
+.content .content-main{
+    position: absolute;
+    height: 500%;
+    width:100%;
+    left:0;
+    top: 0;
+    transition: top 1s;
+}
+.content-main>li{
+    position: relative;
+    height: 20%;
+    background: yellowgreen;
+}
+.content-main>li section{
+    width:1100px;
+    height: 520px;
+    background:powderblue;
+    position: absolute;
+    top:50%;
+    left:50%;
+    margin-top:-260px;
+    margin-left:-550px;
+}
+.home-carousel{
+    position: relative;
+    height: 100%;
+
+}
+.home-carousel li{
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    line-height: 520px;
+    visibility: hidden;
+}
+.home-carousel .active{
+    visibility: visible;
+}
+.home-carousel li:nth-child(1){
+    background: #dc6c5f;
+}
+.home-carousel li:nth-child(2){
+    background:#95dc84;
+}
+.home-carousel li:nth-child(3){
+    background:#64b9d2;
+}
+.home-carousel li:nth-child(4){
+    background:#000000;
 }
