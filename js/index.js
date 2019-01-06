@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded',function () {
     var contentHeight=contentNode.offsetHeight;
     var arrowHalfWidth=arrowNode.offsetWidth/2;
     var newIndex=0;
-    var wheelTimer=null;
+    // var wheelTimer=null;
 
 
 
@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded',function () {
         // 让内容区ul运动
         contentulNode.style.top=-newIndex*contentHeight+'px';
     }
-
+    move(1);
 
 
 
@@ -53,6 +53,7 @@ window.addEventListener('DOMContentLoaded',function () {
     function contentHandle() {
         document.onmousewheel=wheel;
         document.addEventListener('DOMMouseScroll',wheel);
+        var wheelTimer = null;
         function wheel(event) {
             event = event || window.event;
             clearTimeout(wheelTimer);
