@@ -105,6 +105,74 @@ window.addEventListener('DOMContentLoaded',function () {
              // 让内容区ul运动
              contentulNode.style.top=-newIndex*contentHeight+'px';
         }
+
+        firstViewHandle();
+        function firstViewHandle() {
+            var homeCarouselNodes = document.querySelectorAll('.home-carousel li');
+            var homePointNodes = document.querySelectorAll('.home-point li');
+            var homeNode = document.querySelector('.home');
+            var lastIndex = 0;
+            var nowIndex = 0;
+            var lastTime = 0;
+            var timer = null;
+
+            for (var i = 0; i < homePointNodes.length; i++) {
+                homePointNodes[i].index = i;
+                homePointNodes[i].onclick = function () {
+                    //    函数节流：规定时间内，只让第一次生效，后面不生效
+                    //    如果点击是时间超过两秒不生效
+                    var nowTime = Date.now();
+                    console.log(nowTime);
+                    if (nowTime - lastIndex <= 2000)return;
+                    lastTime = nowTime;
+
+
+                    //    同步nowIndex的值
+                    nowIndex = this.index;
+                    // 如果点击同一个就啥也不做
+                    if (nowIndex === lastIndex)return;
+                    if (nowIndex > lastIndex) {
+                        //点击是右边  右边加上right-show 左边加上 left-hide
+                        homeCarouselNodes[nowIndex].className = 'common-title right-show';
+                        homeCarouselNodes[lastIndex].className = 'common-title left-hide';
+                    } else {
+                        homeCarouselNodes[nowIndex].className = 'common-title right-show';
+                        homeCarouselNodes[lastIndex].className = 'common-title left-hide';
+
+                    }
+                    //修正小圆点的显示
+                    homePointNodes[lastIndex].className = '';
+                    this.className = 'active';
+
+
+                }
+            }
+
+            homeNode.onmouseenter = function () {
+                clearInterval(timer);
+            }
+            homeNode.onmouseleave = autoPlay;
+
+            autoPlay();
+            function autoPlay() {
+                timer = setInterval(function () {
+                    nowIndex++;
+                    if (nowIndex >= 4) nowIndex = 0;
+                    homeCarouselNodes[nowIndex].className = 'common-title right-show';
+                    homeCarouselNodes[lastIndex].className = 'common-title left-hide';
+                    homePointNodes[lastIndex].className = '';
+                    homePointNodes[nowIndex].className = 'active';
+                    //同步
+                    lastIndex = nowIndex;
+                }, 2000)
+            }
+
+        }
+
+
+
+
+
  })
 
 

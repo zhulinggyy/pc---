@@ -94,7 +94,7 @@ img{display: block;}
   bottom:0;
   right:0;
   top: 80px;
-  overflow: hidden;
+  /*overflow: hidden;*/
 
 }
 .content .content-main{
@@ -176,12 +176,23 @@ img{display: block;}
     float: left;
     width:20px;
     height: 20px;
+    background: rgba(255,255,255,0.5);
     margin:2px;
     box-shadow:0 0 4px rgba(25,25,25,0.8);
     border-radius: 50%;
+    cursor: pointer;
 }
 .home-point .active{
     background: white;
+}
+.home-carousel .left-hide{
+    visibility: hidden;
+    animation: leftHide 2s linear;
+
+}
+.home-carousel .right-show{
+    visibility: visible;
+    animation: rightShow 2s linear;
 }
 .home-carousel .left-hide{
     visibility: hidden;
@@ -215,6 +226,32 @@ img{display: block;}
     }
     100% {
         visibility: visible;
+    }
+
+}
+@keyframes rightShow{
+    0% {
+        visibility: hidden; transform: translateZ(-200px)
+    }
+    50% {
+        transform: translateX(-40%) rotateY(30deg) scale(0.8)
+    }
+    100% {
+        visibility: visible;
+    }
+
+}
+
+@keyframes leftHide{
+    0% {
+        visibility: visible
+    }
+    50% {
+        transform: translateX(40%) rotateY(-30deg) scale(0.8)
+    }
+    100% {
+        transform: translateZ(-200px);
+        visibility: hidden
     }
 
 }
