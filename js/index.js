@@ -124,7 +124,7 @@ window.addEventListener('DOMContentLoaded',function () {
                     //    如果点击是时间超过两秒不生效
                     var nowTime = Date.now();
                     console.log(nowTime);
-                    if (nowTime - lastIndex <= 2000)return;
+                    if (nowTime - lastTime <= 2000)return;
                     lastTime = nowTime;
 
 
@@ -137,13 +137,15 @@ window.addEventListener('DOMContentLoaded',function () {
                         homeCarouselNodes[nowIndex].className = 'common-title right-show';
                         homeCarouselNodes[lastIndex].className = 'common-title left-hide';
                     } else {
-                        homeCarouselNodes[nowIndex].className = 'common-title right-show';
-                        homeCarouselNodes[lastIndex].className = 'common-title left-hide';
+                        homeCarouselNodes[nowIndex].className = 'common-title left-show';
+                        homeCarouselNodes[lastIndex].className = 'common-title right-hide';
 
                     }
                     //修正小圆点的显示
                     homePointNodes[lastIndex].className = '';
                     this.className = 'active';
+
+                    lastIndex = nowIndex;
 
 
                 }
@@ -175,6 +177,7 @@ window.addEventListener('DOMContentLoaded',function () {
             }
 
         }
+
 
 
 

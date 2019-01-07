@@ -199,14 +199,14 @@ img{display: block;}
     visibility: visible;
     animation: rightShow 2s linear;
 }
-.home-carousel .left-hide{
+.home-carousel .right-hide{
     visibility: hidden;
-    animation: leftHide 2s linear;
+    animation: rightHide 2s linear;
 
 }
-.home-carousel .right-show{
+.home-carousel .left-show{
     visibility: visible;
-    animation: rightShow 2s linear;
+    animation: leftShow 2s linear;
 }
 
 @keyframes leftHide{
@@ -234,7 +234,7 @@ img{display: block;}
     }
 
 }
-@keyframes rightShow{
+@keyframes leftShow{
     0% {
         visibility: hidden; transform: translateZ(-200px)
     }
@@ -247,7 +247,7 @@ img{display: block;}
 
 }
 
-@keyframes leftHide{
+@keyframes rightHide{
     0% {
         visibility: visible
     }
@@ -413,6 +413,87 @@ img{display: block;}
 }
 
 /*第四屏*/
-.about .course-title{
+.course-title{
+    margin: 50px 0 100px 50px;
+}
+.course-content{
+    width:400px;
+    margin-left: 50px;
+}
 
+.about .about_photo{
+    position: absolute;
+    z-index: 10;
+    width: 260px;
+    height: 200px;
+    border:5px rgba(255,255,255,0.5) solid;
+    border-radius: 8px;
+    transition: transform 1s;
+}
+.about_photo:nth-of-type(1){
+    left:750px;
+    top:50px;
+}
+.about_photo:nth-of-type(1) div{
+    background-image: url("../img/about1.jpg");
+    background-repeat: no-repeat;
+
+}
+.about_photo:nth-of-type(2) div{
+    background-image: url("../img/about3.jpg");
+    background-repeat: no-repeat;
+}
+
+.about_photo:nth-of-type(2){
+    left:600px;
+    top:290px;
+}
+.about_photo li:nth-of-type(2) div{
+    background-position: -130px 0;
+}
+.about_photo li:nth-of-type(3) div{
+    background-position: 0 -100px;
+}
+.about_photo li:nth-of-type(4) div{
+    background-position: -130px -100px;
+}
+.about_photo ul{
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height: 100%;
+
+}
+.about_photo li{
+    float: left;
+    width:50%;
+    height:50%;
+    overflow: hidden;
+}
+.about_photo div{
+    height: 100%;
+    width: 100%;
+    transition: transform 1s;
+}
+.about_photo:hover li:nth-child(1) div{
+    transform: translateY(100px);
+}
+.about_photo:hover li:nth-child(2) div{
+    transform: translateX(-130px);
+}
+.about_photo:hover li:nth-child(3) div{
+    transform: translateX(130px);
+}
+.about_photo:hover li:nth-child(4) div{
+    transform: translateY(-100px);
+}
+.about-line{
+    position: absolute;
+    right: 188px;
+    top: -13px;
+    width:357px;
+    height: 998px;
+    background-image: url('../img/greenLine.png');
+    background-repeat: no-repeat;
 }
