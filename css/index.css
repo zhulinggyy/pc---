@@ -32,13 +32,12 @@ img{display: block;}
   position: relative;
   width:100%;
   height: 80px;
-  background: plum;
+  /*background: plum;*/
   z-index: 10;
 }
 .headerMain{
   width:1100px;
   height: 80px;
-  background: yellow;
   margin:0 auto;
   /*position: relative;*/
 }
@@ -496,4 +495,64 @@ img{display: block;}
     height: 998px;
     background-image: url('../img/greenLine.png');
     background-repeat: no-repeat;
+}
+/*	标题:  空隙,上下左右50
+		     宽度,400
+	文本区域: 空隙,上下左右50
+		          宽度,400
+
+	列表区域: 宽度:944 高度 448
+	        top ：230px
+
+    列表区域元素：宽度：236px
+            background-position: 3px 0px;
+            background-position: -230px 0px;
+	        background-position: -483px 0px;
+	        background-position: -710px 0px;
+
+	*/
+/*第五屏*/
+
+.team .team-title{
+    margin: 50px;
+    width: 400px;
+    float: left;
+}
+.team .team-content{
+    margin: 50px;
+    width: 400px;
+    float: right;
+}
+.team .team_person{
+    position: absolute;
+    top:230px;
+    left:50%;
+    transform: translate(-50%);
+    width: 944px;
+    height: 448px;
+
+}
+.team .team_person li{
+    float: left;
+    width:236px;
+    height: 100%;
+    background-image: url("../img/team.png");
+    background-repeat: no-repeat;
+}
+.team .team_person li:nth-child(1){
+    background-position: 3px 0px;
+}
+.team .team_person li:nth-child(2){
+    background-position: -230px 0px;
+}
+.team .team_person li:nth-child(3){
+    background-position: -483px 0px;
+}
+.team .team_person li:nth-child(4){
+    background-position: -710px 0px;
+}
+.canvas{
+    position: absolute;
+    top:0;
+    /*background: pink;*/
 }

@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded',function () {
         // 让内容区ul运动
         contentulNode.style.top=-newIndex*contentHeight+'px';
     }
-    move(3);
+    move(4);
 
 
 
@@ -179,8 +179,110 @@ window.addEventListener('DOMContentLoaded',function () {
         }
 
 
+ //第五屏
+        listViewHandle();
+        function listViewHandle() {
+          var teamUlNode = document.querySelector('.team_person');
+          var teamLiNodes = document.querySelectorAll('.team_person li');
 
+          var width = teamLiNodes[0].offsetWidth;
+          var height = teamLiNodes[0].offsetHeight;
+          var canvas = null;
+          var createCircleTimer = null;
+          var paintingTimer = null;
 
+          for (var i = 0; i < teamLiNodes.length; i++) {
+            teamLiNodes[i].index = i;
+            teamLiNodes[i].onmouseenter = function () {
+              for (var j = 0; j < teamLiNodes.length; j++) {
+                teamLiNodes[j].style.opacity = 0.5;
+              }
+
+              this.style.opacity = 1;
+
+              //  创建画布
+              if (!canvas) {
+                canvas = document.createElement('canvas');
+                canvas.width = width;
+                canvas.height = height;
+                canvas.className = 'canvas';
+                bubble(canvas);
+                teamUlNode.appendChild(canvas);
+              }
+              canvas.style.left = this.index * width + 'px';
+            }
+          }
+
+          teamUlNode.onmouseleave = function () {
+            for (var j = 0; j < teamLiNodes.length; j++) {
+              teamLiNodes[j].style.opacity = 1;
+            }
+            //    清除画布
+            canvas.remove();
+            canvas = null;
+            //  清除定时器
+            clearInterval(createCircleTimer);
+            clearInterval(paintingTimer);
+          }
+
+          function bubble(canvas) {
+            if (canvas.getContext) {
+              var ctx = canvas.getContext('2d');
+              var width = canvas.width;
+              var height = canvas.height;
+              var arr = [];
+              //    生成圆
+              createCircleTimer = setInterval(function () {
+                var r = Math.round(Math.random() * 255);
+                var g = Math.round(Math.random() * 255);
+                var b = Math.round(Math.random() * 255);
+
+                var c_r = Math.round(Math.random() * 8 + 2);
+                var s = Math.round(Math.random() * 50 + 20);
+                var y = height + c_r;
+                var x = Math.round(Math.random() * width);
+
+                //  添加到数组
+                arr.push({
+                  r: r,
+                  g: g,
+                  b: b,
+                  c_r: c_r,
+                  s: s,
+                  x: x,
+                  y: y,
+                  deg: 0,
+                })
+              }, 20);
+
+              //  画圆
+              paintingTimer = setInterval(function () {
+                ctx.clearRect(0, 0, width, height);
+                for (var i = 0; i < arr.length; i++) {
+                  var item = arr[i];
+                  item.deg += 6;
+                  var rad = item.deg * Math.PI / 180;
+                  var x = item.x + Math.sin(rad) * item.s;
+                  var y = item.y - rad * item.s;
+                  if (y <= -item.c_r) {
+                    arr.splice(i, 1);
+                    continue;
+                  }
+
+                  ctx.fillStyle = 'rgb(' + item.r + ',' + item.g + ',' + item.b + ')';
+                  ctx.beginPath();
+                  ctx.arc(x, y, item.c_r, 0, 2 * Math.PI);
+                  ctx.fill();
+
+                }
+              }, 1000 / 60)
+            } else {
+              alert('您的浏览器不支持canvas');
+            }
+
+          }
+
+        }
 
 
  })
