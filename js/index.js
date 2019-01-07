@@ -44,7 +44,7 @@ window.addEventListener('DOMContentLoaded',function () {
         // 让内容区ul运动
         contentulNode.style.top=-newIndex*contentHeight+'px';
     }
-    move(1);
+    move(3);
 
 
 
@@ -154,10 +154,16 @@ window.addEventListener('DOMContentLoaded',function () {
             }
             homeNode.onmouseleave = autoPlay;
 
+            //自动轮播
             autoPlay();
             function autoPlay() {
                 timer = setInterval(function () {
                     nowIndex++;
+
+                    //同步上一次点击时间，为了在轮播是用户不能点击小圆点
+                    lastTime=Date.now();
+
+
                     if (nowIndex >= 4) nowIndex = 0;
                     homeCarouselNodes[nowIndex].className = 'common-title right-show';
                     homeCarouselNodes[lastIndex].className = 'common-title left-hide';
